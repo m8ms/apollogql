@@ -1,0 +1,128 @@
+<section>
+    <h3>Migrujemy!</h3>
+</section>
+
+<section>
+    <h5>Appka Reduxowa</h5>
+    <p>typowy flow zapytania</p>
+
+    <pre><code class='lang-java large-code' data-noescape>
+   <span class='fragment' data-fragment-index='1'>1. Component</span> <span class='fragment' data-fragment-index='2'>&rarr;</span> <span class='fragment' data-fragment-index='3'>2. Service</span> <span class='fragment' data-fragment-index='4'>&rarr;</span> <span class='fragment' data-fragment-index='5'>3. API call</span> <span class='fragment' data-fragment-index='6'>&rarr;</span> <span class='fragment' data-fragment-index='7'>4. Service</span>
+           <span class='fragment' data-fragment-index='14'>&uarr;</span>                                      <span class='fragment' data-fragment-index='8'>&darr;</span>
+      <span class='fragment' data-fragment-index='13'>7. Redux Store</span> <span class='fragment' data-fragment-index='12'>&larr;</span> <span class='fragment' data-fragment-index='11'>6. Reducer</span> <span class='fragment' data-fragment-index='10'>&larr;</span> <span class='fragment' data-fragment-index='9'>5. Redux Action</span>
+    </code></pre>
+
+    <aside class='notes'>
+        interpretery systemowe: JScript, nodejs
+        DOM - czym jest
+    </aside>
+</section>
+
+<section>
+    <h5>Przemiana...</h5>
+
+    <ul>
+        <li class='fragment'>`api call` &rAarr; <code data-noescape>gql\`{ query { ... } }\`</code></li>
+        <li class='fragment'>`service` &rAarr; <code data-noescape>&lt;Query></code> / <code data-noescape>&lt;Mutation></code></li>
+        <li class='fragment'>`redux` &rAarr; Apollo Cache</li>
+        <li class='fragment'>`reducer` &rAarr; 🗑</li>
+        <li class='fragment'>`akcja` &rAarr; 🗑</li>
+    </ul>
+
+</section>
+
+<section>
+    <h5>Niegdyś...</h5>
+    <p class='fragment'>Warstwy:</p>
+    <table class='fragment' style='font-size: 2rem'>
+        <tr style='color: darkturquoise'>
+            <td>komponenty</td>
+            <td>UserCard</td>
+            <td>TeamPopup</td>
+            <td>etc...</td>
+        </tr>
+        <tr style='color: olivedrab'>
+            <td>serwisy</td>
+            <td>getUser</td>
+            <td>getTeam</td>
+            <td>etc...</td>
+        </tr>
+        <tr style='color: darkorange'>
+            <td>api</td>
+            <td>getUser</td>
+            <td>updateTeam</td>
+            <td>etc...</td>
+        </tr>
+        <tr style='color: crimson'>
+            <td>akcje</td>
+            <td>dispatchUser</td>
+            <td>dispatchUpdateTeam</td>
+            <td>etc...</td>
+        </tr>
+        <tr style='color: mediumpurple'>
+            <td>reducery</td>
+             <td>setUser</td>
+            <td>setTeam</td>
+            <td>etc...</td>
+        </tr>
+    </table>
+</section>
+
+<section>
+    <h5>Teraz</h5>
+    <small>
+        <ul class='fragment no-bullets'>
+            <li>
+                `components/`
+                <ul>
+                    <li>
+                        `UserCard/`
+                        <ul>
+                            <li style='color: olivedrab'>`UserCardContainer.js`<br />
+                                <small>logika biznesowa</small>
+                            </li>
+                            <li style='color: darkorange'>`UserCardGql.js`<br />
+                                <small>GraphQL połączenie z API</small>
+                            </li>
+                            <li style='color: darkturquoise'>`UserCardView.js`<br />
+                                <small>tylko wyświetlanie</small>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </small>
+</section>
+
+<section>
+    <p>trochę wspólności</p>
+    <small>
+        <ul class='fragment no-bullets'>
+            <li>
+                `graphql/`
+                <ul>
+                    <li>
+                        `common/`
+                        <ul>
+                            <li>`resolvers.js`<br />
+                                <small>update lokalnego stanu</small>
+                            </li>
+                            <li>`fragments.gql.js`<br />
+                                <small>wspólne elementy zapytań GraphQL</small>
+                            </li>
+                            <li>`common.gql.js`<br />
+                                <small>wspólne zapytania GraphQL</small>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>`init-apollo.js`<br />
+                        <small>inicjalizacja (SSR)</small>
+                    </li>
+                    <li>`initial-state.js`<br />
+                        <small>początkowy stan lokalnych pól</small></li>
+                </ul>
+            </li>
+        </ul>
+    </small>
+</section>

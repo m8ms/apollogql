@@ -1,0 +1,44 @@
+<section>
+    <h3>Apollo + next.js</h3>
+</section>
+<section>
+    <p>`init-apollo.js`</p>
+    <small>
+        <ul>
+            <li class='fragment'>SSR: nowa instancja Apollo dla każdego zapytania</li>
+            <li class='fragment'>Client: nowa instancja - singleton</li>
+            <li class='fragment'>Inicjalizacja:
+                <ul>
+                    <li class='fragment'>cache (store)</li>
+                    <li class='fragment'>lokalnych resolverów</li>
+                    <li class='fragment'>`initialState`</li>
+                </ul>
+            </li>
+        </ul>
+    </small>
+</section>
+<section>
+    <p>hoc `with-apollo-client.js`</p>
+    <small><p class='fragment'>implementuje `getInitialProps`</p>
+        <ol class='fragment'>
+            <li>autoryzacja i ew. przekierowanie</li>
+            <li class='fragment'>SSR: analiza virtual-dom i ładowanie wszystkich danych z GraphQL do cache</li>
+            <li class='fragment'>initApollo</li>
+            <li class='fragment'>zwrotka z propsami do `_app.js` i render:</li>
+        </ol>
+    </small>
+        <p><pre class='fragment'><code data-noescape>render () {
+  return &lt;App {...this.props} apolloClient={this.apolloClient} />
+}</code></pre></p>
+    <small><p class='fragment'>`withApolloClient(App)`</p></small>
+
+</section>
+<section>
+
+    <img src='img/apollo-next.png' height="200" width="200" />
+    <p>
+        <small><a href='https://github.com/zeit/next.js/tree/master/examples/with-apollo'>
+            https://github.com/zeit/next.js/tree/master/examples/with-apollo
+        </a></small>
+    </p>
+</section>

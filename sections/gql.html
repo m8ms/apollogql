@@ -1,0 +1,169 @@
+<section>
+    <h3>GraphQL</h3>
+</section>
+<section>
+    <ul>
+        <li>Alternatywa dla REST <span class='fragment'>(i JSON-API)</span></li>
+        <li class='fragment'>Zapytania -> POSTy</li>
+        <li class='fragment'>Payload -> JSON</li>
+        <li class='fragment'>1 adres url API</li>
+        <li class='fragment'>pola (fields)</li>
+        <li class='fragment'>zapytania: Query i Mutation</li>
+    </ul>
+</section>
+<section>
+    <h5>query</h5>
+<div class='side-by-side'>
+    <pre class='fragment'><code data-noescape>query {
+  hero {
+    name
+  }
+  droid(id: "2000") {
+    name
+  }
+}</code></pre>
+
+    <pre class='fragment'><code data-noescape>{
+  "data": {
+    "hero": {
+      "name": "R2-D2"
+    },
+    "droid": {
+      "name": "C-3PO"
+    }
+  }
+}</code></pre>
+</div>
+<p class='fragment'>🐿</p>
+<div class='side-by-side'>
+    <pre class='fragment'><code data-noescape>query GetHeroWithFriends {
+  hero {
+    name
+    friends {
+      name
+    }
+  }
+}</code></pre>
+
+    <pre class='fragment'><code data-noescape>{
+  "data": {
+    "hero": {
+      "name": "R2-D2",
+      "friends": [
+        { "name": "Luke Skywalker" },
+        { "name": "Han Solo" },
+        { "name": "Leia Organa" }
+      ]
+    }
+  }
+}</code></pre>
+</div>
+</section>
+
+<section>
+    <h5>mutation </h5>
+    <pre class='fragment'><code class='lang-elixir'>mutation CreateReviewForEpisode($ep: Episode!, $review: ReviewInput!) {
+  createReview(episode: $ep, review: $review) {
+    stars
+    commentary
+  }
+}</code></pre>
+    <p></p>
+<div class='side-by-side'>
+        <pre class='fragment'><code data-noescape>#variables:
+{
+  "ep": "JEDI",
+  "review": {
+    "stars": 5,
+    "commentary": "This is a great movie!"
+  }
+}</code></pre>
+    <pre class='fragment'><code data-noescape>#result:
+{
+  "data": {
+    "createReview": {
+      "stars": 5,
+      "commentary": "This is a great movie!"
+    }
+  }
+}</code></pre>
+    </div>
+</section>
+
+<section>
+    <h5>Introspekcja</h5>
+
+    <div class='side-by-side'>
+    <pre class='fragment'><code>{
+  \_\_schema {
+    types {
+      name
+    }
+  }
+}</code></pre>
+    <pre class='fragment'><code data-noescape>{
+  "data": {
+    "\_\_schema": {
+      "types": [
+        { "name": "Query" },
+        { "name": "Mutation" },
+
+        **{ "name": "Episode" },
+        { "name": "Character" },**
+
+        { "name": "\_\_Schema" },
+        { "name": "\_\_Type" },
+        { "name": "\_\_TypeKind" },
+        { "name": "\_\_Field" },
+        # etc.
+      ]
+    }
+  }
+}</code></pre>
+    </div>
+</section>
+
+<section>
+    <h5>Introspekcja</h5>
+
+    <div class='side-by-side'>
+    <pre class='fragment'><code>{
+  \_\_schema {
+    queryType {
+      fields {
+        name
+      }
+    }
+    mutationType {
+      fields {
+        name
+      }
+    }
+  }
+}</code></pre>
+    <pre class='fragment'><code data-noescape>{
+  \_\_type(name: "Droid") {
+    name
+    fields {
+      name
+      type {
+        name
+        kind
+        ofType {
+          name
+          kind
+        }
+      }
+    }
+  }
+}</code></pre>
+    </div>
+    <aside class='notes'>
+        pluginy do vs code i webstorma
+        same to robią i więcej
+    </aside>
+</section>
+<section>
+    <img src='img/graphqlorg.png' height="200" width="200"/>
+    <p><small><a href='https://graphql.org/learn/'>https://graphql.org/learn/</a></small></p>
+</section>
